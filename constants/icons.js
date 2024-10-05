@@ -13,6 +13,7 @@ import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import leaderboard from "../assets/icons/leaderboard.png";
 import calorie from "../assets/icons/calorie.png";
+import points from "../assets/icons/reward.png";
 
 export default {
   play,
@@ -30,4 +31,5 @@ export default {
   eye,
   leaderboard,
   calorie,
+  points,
 };

@@ -6,6 +6,8 @@ import logo from "../assets/images/logo.png";
 import logoSmall from "../assets/images/logo-small.png";
 import empty from "../assets/images/empty.png";
 import homepic from "../assets/images/home-pic.jpg";
+import graph from "../assets/images/graph.png";
+import dark_graph from "../assets/images/graph_dark.png";
 
 export default {
   profile,
@@ -16,4 +18,6 @@ export default {
   logoSmall,
   empty,
   homepic,
+  graph,
+  dark_graph,
 };

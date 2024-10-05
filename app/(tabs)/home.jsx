@@ -7,8 +7,10 @@ import Trending from "../components/Trending";
 import VideoCard from "../components/VideoCard";
 import useAppWrite from "../../lib/useAppWrite";
 import { GetAllPosts } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+  const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppWrite(GetAllPosts); // Directly assign the return value to posts
   return (
     <SafeAreaView className="bg-primary flex-1 h-full">
@@ -33,7 +35,9 @@ const Home = () => {
                 <Text className="font-pmedium text-sm text-gray-100">
                   Welcome Back
                 </Text>
-                <Text className="text-2xl font-psemibold text-white">user</Text>
+                <Text className="text-2xl font-psemibold text-white">
+                  {user.username}
+                </Text>
               </View>
 
               <View className="mt-1.5">
