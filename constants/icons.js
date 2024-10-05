@@ -14,6 +14,7 @@ import play from "../assets/icons/play.png";
 import leaderboard from "../assets/icons/leaderboard.png";
 import calorie from "../assets/icons/calorie.png";
 import points from "../assets/icons/reward.png";
+import gold_badge from "../assets/icons/gold_badge.png";
 
 export default {
   play,
@@ -32,4 +33,5 @@ export default {
   leaderboard,
   calorie,
   points,
+  gold_badge,
 };
