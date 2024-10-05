@@ -1,10 +1,11 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -15,10 +16,21 @@ const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error! Please fill in all the fields");
+    }
     setIsSubmitting(true);
-    console.log("submitted");
-    setIsSubmitting(false);
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+      router.replace("/home");
+      // use replace instead of redirect when you dont want app to remeber previous page. SO automaticaly there will be on back option/button to revisit this screen afterwards. Normally used for authenitication
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      console.log("submitted");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -41,7 +53,7 @@ const SignUp = () => {
             handleChangeText={(e) =>
               setForm({
                 ...form,
-                email: e,
+                username: e,
               })
             }
             otherStyles="mt-7"

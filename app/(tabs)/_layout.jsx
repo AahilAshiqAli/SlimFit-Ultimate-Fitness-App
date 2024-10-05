@@ -63,9 +63,9 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.bookmark}
+                icon={icons.calorie}
                 color={color}
-                name="Calorie Identifier"
+                name="Cal Check"
                 focused={focused}
               />
             ),
@@ -79,9 +79,9 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.leaderboard}
                 color={color}
-                name="LeaderBoard"
+                name="FitRank"
                 focused={focused}
               />
             ),
