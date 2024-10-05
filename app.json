@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package" : "com.stickersmash.stickersmash"
+      "package": "com.stickersmash.stickersmash"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +28,11 @@
     "plugins": [
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4762383c-8acc-400e-b51f-310cd81832ee"
+      }
+    }
   }
 }

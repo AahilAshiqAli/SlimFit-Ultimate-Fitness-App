@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from "react-native";
+import React from "react";
+import PushNotification from "../components/notifications";
 
 const Create = () => {
   return (
     <View>
-      <Text>Create</Text>
+      <PushNotification />
     </View>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;

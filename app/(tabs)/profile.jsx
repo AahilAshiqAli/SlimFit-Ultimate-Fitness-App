@@ -4,9 +4,10 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  ProgressBarAndroid,
   ScrollView,
 } from "react-native";
+import ProgressBarAndroid from "@react-native-community/progress-bar-android";
+
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../../constants/images";
