@@ -1,15 +1,22 @@
-import { View, Text, FlatList, Image, Alert } from "react-native";
-import React from "react";
+import { View, Text, FlatList, Image } from "react-native";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../../constants/images";
 import SearchInput from "../components/SearchInput";
-import Trending from "../components/Trending";
 import VideoCard from "../components/VideoCard";
+import { searchPosts } from "../../lib/appwrite";
 import useAppWrite from "../../lib/useAppWrite";
-import { GetAllPosts } from "../../lib/appwrite";
+import { useLocalSearchParams } from "expo-router";
+import Empty from "../components/Empty";
 
-const Home = () => {
-  const { data: posts, refetch } = useAppWrite(GetAllPosts); // Directly assign the return value to posts
+const Search = () => {
+  const { query } = useLocalSearchParams();
+  const { data: posts, refetch } = useAppWrite(() => searchPosts(query));
+
+  useEffect(() => {
+    refetch();
+  }, [query]);
+
   return (
     <SafeAreaView className="bg-primary flex-1 h-full">
       {/* vertical List*/}
@@ -45,24 +52,17 @@ const Home = () => {
               </View>
             </View>
 
-            <SearchInput placeholder={"Search for an exercise"} />
-
-            <View className="w-full flex-1 pt-5 pb-8">
-              <Text className="text-white font-psemibold text-lg ">
-                Your Exercises
-              </Text>
-
-              <Trending posts={posts} />
-            </View>
-            <Text className="text-white font-psemibold text-lg ">
-              Popular Exercises
-            </Text>
+            <SearchInput
+              initialquery={query}
+              placeholder={"Search for an exercise"}
+            />
           </View>
         )}
+        ListEmptyComponent={() => <Empty title="No Matching Exercise Found" />}
       />
       {/* scroll view mei dono vertical and horizontal scroll nhi hosakte*/}
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default Search;

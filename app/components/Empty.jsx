@@ -2,7 +2,7 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 import images from "../../constants/images";
 
-const Empty = () => {
+const Empty = ({ title }) => {
   return (
     <View className="justify-center items-center px-4">
       <Image
@@ -10,9 +10,7 @@ const Empty = () => {
         className="w-[270px] h-[215px]"
         resizeMode="contain"
       />
-      <Text className="text-white font-pregular text-lg">
-        No Plans Subscribed
-      </Text>
+      <Text className="text-white font-pregular text-lg">{title}</Text>
     </View>
   );
 };

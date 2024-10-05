@@ -2,6 +2,7 @@ import { View, Text, FlatList, RefreshControl } from "react-native";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
 import { TouchableOpacity, ImageBackground } from "react-native";
+import Empty from "../components/Empty";
 
 const zoomIn = {
   0: {
@@ -103,6 +104,7 @@ const Trending = ({ posts }) => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
+      ListEmptyComponent={() => <Empty title="No Matching Exercise Found" />}
     />
   );
 };
