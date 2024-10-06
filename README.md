@@ -3,6 +3,7 @@ React Native Expo(SDK 51) Application <b>Fitness App</b>
 To run the project, you need to install dependencies by following commands
 <br>
 node version 17+ (mine 20) installation<br>
+Install node Modules for expo SDK 51<br>
 Install expo dependencies<br>
 npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar<br><br>
 Install nativeWind with TailWindCSS<br>
