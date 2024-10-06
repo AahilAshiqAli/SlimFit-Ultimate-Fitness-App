@@ -22,3 +22,12 @@ npm install react-native-animatable
 <br>
 Finally, to run the app:<br>
 npx expo start -c
+
+
+<br><br>
+To get android APK for the app. Simply install EAS
+<br>
+<b>Run commands</b><br>
+npm install --global eas-cli<br>
+eas login<br>
+eas build -p android --profile preview<br>
