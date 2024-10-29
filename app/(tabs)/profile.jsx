@@ -1,13 +1,5 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import ProgressBarAndroid from "@react-native-community/progress-bar-android";
-
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { router } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../../constants/images";
@@ -15,13 +7,17 @@ import icons from "../../constants/icons";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import Trending from "../components/Trending";
 import useAppWrite from "../../lib/useAppWrite";
-import { GetAllPosts } from "../../lib/appwrite";
+import { GetAllPosts, signOut } from "../../lib/appwrite";
 
 const Profile = () => {
-  const { user } = useGlobalContext();
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const { data: posts, refetch } = useAppWrite(GetAllPosts);
 
-  const logout = () => {
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
+    router.replace("/sign-in");
     console.log("User logged out successfully");
   };
 
@@ -71,7 +67,9 @@ const Profile = () => {
         <View className="flex justify-center items-center mt-8 mb-4">
           <View className="w-24 h-24 border border-secondary-200 rounded-full justify-center items-center overflow-hidden shadow-lg">
             <Image
-              source={{ uri: user.avatar }}
+              source={
+                user && user.avatar ? { uri: user.avatar } : icons.profile
+              }
               className="w-full h-full"
               resizeMode="cover"
             />
@@ -81,9 +79,11 @@ const Profile = () => {
         {/* User Info */}
         <View className="flex justify-center items-center space-y-2">
           <Text className="text-white text-xl font-psemibold">
-            {user.username}
+            {user ? user.username : "Guest"}
           </Text>
-          <Text className="text-gray-300 text-sm">{user.email}</Text>
+          <Text className="text-gray-300 text-sm">
+            {user ? user.email : "Guest"}
+          </Text>
         </View>
 
         {/* Points Section */}
@@ -111,21 +111,46 @@ const Profile = () => {
             Fitness Goals
           </Text>
           <Text className="text-gray-300 mb-2">Lose 5 kg - Progress: 60%</Text>
-          <ProgressBarAndroid
-            styleAttr="Horizontal"
-            indeterminate={false}
-            progress={fitnessGoalProgress}
-            color="white"
-          />
+
+          {/* Custom Progress Bar */}
+          <View
+            style={{
+              backgroundColor: "#555",
+              height: 8,
+              borderRadius: 4,
+              overflow: "hidden",
+            }}
+          >
+            <View
+              style={{
+                width: `${fitnessGoalProgress * 100}%`,
+                backgroundColor: "white",
+                height: "100%",
+              }}
+            />
+          </View>
+
           <Text className="text-gray-300 mt-4 mb-2">
             Run 5 km in under 30 minutes - Progress: 75%
           </Text>
-          <ProgressBarAndroid
-            styleAttr="Horizontal"
-            indeterminate={false}
-            progress={dailyGoalProgress}
-            color="white"
-          />
+
+          {/* Another Custom Progress Bar */}
+          <View
+            style={{
+              backgroundColor: "#555",
+              height: 8,
+              borderRadius: 4,
+              overflow: "hidden",
+            }}
+          >
+            <View
+              style={{
+                width: `${dailyGoalProgress * 100}%`,
+                backgroundColor: "white",
+                height: "100%",
+              }}
+            />
+          </View>
         </View>
 
         {/* Graph of Recent Activity */}
